@@ -28,9 +28,9 @@ public class App {
 
       System.out.println(looseChange);
 
-      if (looseChange == null) {
-        JOptionPane.showMessageDialog (null, "Don't be a jerk. Put in an actual number, please.");
-      }
+      // if (looseChange == null) {
+      //   JOptionPane.showMessageDialog (null, "Don't be a jerk. Put in an actual number, please.");
+      // }
 
       String finalResult = coinCombo(looseChange);
       model.put("finalResult", finalResult);
@@ -57,7 +57,7 @@ public class App {
     } else if (quarters > 1) {
       output += (quarters + " quarters, ");
     } else {
-      output += " No quarters, ";
+      output += "No quarters, ";
     }
 
 
@@ -71,7 +71,7 @@ public class App {
     } else if (dimes > 1) {
       output += (dimes + " dimes, ");
     } else {
-      output += " no dimes, ";
+      output += "no dimes, ";
     }
 
     while ( userCoins >= 5) {
@@ -84,7 +84,7 @@ public class App {
     } else if (nickels > 1) {
       output += (nickels + " nickels, ");
     } else {
-      output += " no nickels, ";
+      output += "no nickels, ";
     }
 
     while ( userCoins > 0) {

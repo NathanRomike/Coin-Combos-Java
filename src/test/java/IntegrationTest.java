@@ -24,4 +24,18 @@ public class IntegrationTest extends FluentTest {
       goTo("http://localhost:4567/");
       assertThat(pageSource()).contains("");
     }
+
+  @Test
+    public void checkHomePage() {
+      goTo("http://localhost:4567/");
+      assertThat(pageSource()).contains("Enter an amount");
+    }
+
+  @Test
+    public void enterCoinAmount() {
+      goTo("http://localhost:4567/");
+      fill("#coinage").with("90");
+      submit(".btn");
+      assertThat(pageSource()).contains("Here's what'cha got: 3 quarters, 1 dime, 1 nickel, and no pennies.");
+    }
 }
