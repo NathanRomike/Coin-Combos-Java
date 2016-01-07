@@ -26,14 +26,30 @@ public class App {
 
       Integer looseChange = Integer.parseInt(userCoinString);
 
-      System.out.println(looseChange);
-
       // if (looseChange == null) {
       //   JOptionPane.showMessageDialog (null, "Don't be a jerk. Put in an actual number, please.");
       // }
 
       String finalResult = coinCombo(looseChange);
       model.put("finalResult", finalResult);
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    get("/limitedResults", (request, response) -> {
+      HashMap model = new HashMap();
+      model.put("template", "templates/limitedResults.vtl" );
+
+      String userLimitedString = request.queryParams("limitCoinInput");
+      model.put("userLimitedString", userLimitedString);
+
+      Integer looseLimitedChange = Integer.parseInt(userLimitedString);
+
+      // if (looseChange == null) {
+      //   JOptionPane.showMessageDialog (null, "Don't be a jerk. Put in an actual number, please.");
+      // }
+
+      String finalLimitedResult = limitedCoins(looseLimitedChange);
+      model.put("finalLimitedResult", finalLimitedResult);
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
   }
@@ -101,5 +117,71 @@ public class App {
     }
 
     return output;
+  }
+
+  public static String limitedCoins(Integer userCoins) {
+
+    String outputLimit = "We've only got a dollar worth of quarters, so here's what your change: ";
+
+    Integer quarters = 0;
+    Integer dimes = 0;
+    Integer nickels = 0;
+    Integer pennies = 0;
+    Integer quarterLimit = 4;
+
+    while ( (userCoins >= 25) && (quarterLimit > 0) ){
+      userCoins -= 25;
+      quarters++;
+      quarterLimit--;
+    }
+
+    while ( (userCoins >= 10) ) {
+      userCoins -= 10;
+      dimes++;
+    }
+
+    while ( (userCoins >= 5) ) {
+    userCoins -= 5;
+    nickels++;
+    }
+
+    while ( (userCoins > 0) ) {
+      userCoins -= 1;
+      pennies++;
+    }
+
+    if (quarters == 1) {
+      outputLimit += (quarters + " quarter, ");
+    } else if (quarters > 1) {
+      outputLimit += (quarters + " quarters, ");
+    } else {
+      outputLimit += "No quarters, ";
+    }
+
+    if (dimes == 1) {
+      outputLimit += (dimes + " dime, ");
+    } else if (dimes > 1) {
+      outputLimit += (dimes + " dimes, ");
+    } else {
+      outputLimit += "no dimes, ";
+    }
+
+    if (nickels == 1) {
+      outputLimit += (nickels + " nickel, ");
+    } else if (nickels > 1) {
+      outputLimit += (nickels + " nickels, ");
+    } else {
+      outputLimit += "no nickels, ";
+    }
+
+    if (pennies == 1) {
+      outputLimit += ("and " + pennies + " penny.");
+    } else if (pennies > 1) {
+      outputLimit += ("and " + pennies + " pennies.");
+    } else {
+      outputLimit += "and no pennies.";
+    }
+
+    return outputLimit;
   }
 }

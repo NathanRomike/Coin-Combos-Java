@@ -1,8 +1,19 @@
-<h1>Enter an amount, and we'll give your change:</h1>
+<h2>Enter an amount, and we'll give your change:</h2>
 <form action='/results'>
   <div class="form-group">
     <label for="user-coin-input">How much change do you have?</label>
     <input id="coinage" name="coinage" class="form-control" type="text">
   </div>
-  <button type="submit" class="btn">Go!</button>
+  <button type="submit" class="btn btn-info">We've got a ton of change!</button>
+</form>
+<br>
+<br>
+<br>
+<br>
+<form action='/limitedResults'>
+  <div class="form-group">
+    <label for="user-coin-input">Whoops, we're running out of cash...</label>
+    <input id="limitCoinInput" name="limitCoinInput" class="form-control" type="text">
+  </div>
+  <button type="submit" class="btn btn-warning">We've some change, but mostly pennies!</button>
 </form>

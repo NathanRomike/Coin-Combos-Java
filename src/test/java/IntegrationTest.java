@@ -35,7 +35,15 @@ public class IntegrationTest extends FluentTest {
     public void enterCoinAmount() {
       goTo("http://localhost:4567/");
       fill("#coinage").with("90");
-      submit(".btn");
+      submit(".btn-info");
       assertThat(pageSource()).contains("Here's what'cha got: 3 quarters, 1 dime, 1 nickel, and no pennies.");
+    }
+
+  @Test
+    public void enterLimitedCoin() {
+      goTo("http://localhost:4567/");
+      fill("#limitCoinInput").with("125");
+      submit(".btn-warning");
+      assertThat(pageSource()).contains("We've only got a dollar worth of quarters, so here's what your change: 4 quarters, 2 dimes, 1 nickel, and no pennies.");
     }
 }
