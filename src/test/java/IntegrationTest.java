@@ -44,6 +44,6 @@ public class IntegrationTest extends FluentTest {
       goTo("http://localhost:4567/");
       fill("#limitCoinInput").with("125");
       submit(".btn-warning");
-      assertThat(pageSource()).contains("We've only got a dollar worth of quarters, so here's what your change: 4 quarters, 2 dimes, 1 nickel, and no pennies.");
+      assertThat(pageSource()).contains("So, here's what you get: 4 quarters, 2 dimes, 1 nickel, and no pennies.");
     }
 }

@@ -21,6 +21,7 @@ public class App {
       HashMap model = new HashMap();
       model.put("template", "templates/results.vtl" );
 
+
       String userCoinString = request.queryParams("coinage");
       model.put("userCoinString", userCoinString);
 
@@ -29,7 +30,6 @@ public class App {
       // if (looseChange == null) {
       //   JOptionPane.showMessageDialog (null, "Don't be a jerk. Put in an actual number, please.");
       // }
-
       String finalResult = coinCombo(looseChange);
       model.put("finalResult", finalResult);
       return new ModelAndView(model, layout);
@@ -121,13 +121,14 @@ public class App {
 
   public static String limitedCoins(Integer userCoins) {
 
-    String outputLimit = "We've only got a dollar worth of quarters, so here's what your change: ";
-
+    String outputLimit = "So, here's what you get: ";
     Integer quarters = 0;
     Integer dimes = 0;
     Integer nickels = 0;
     Integer pennies = 0;
     Integer quarterLimit = 4;
+    Integer dimeLimit = 5;
+    Integer nickelLimit = 3;
 
     while ( (userCoins >= 25) && (quarterLimit > 0) ){
       userCoins -= 25;
@@ -135,14 +136,16 @@ public class App {
       quarterLimit--;
     }
 
-    while ( (userCoins >= 10) ) {
+    while ( (userCoins >= 10) && (dimeLimit > 0) ) {
       userCoins -= 10;
       dimes++;
+      dimeLimit--;
     }
 
-    while ( (userCoins >= 5) ) {
-    userCoins -= 5;
-    nickels++;
+    while ( (userCoins >= 5) && (nickelLimit > 0) ) {
+      userCoins -= 5;
+      nickels++;
+      nickelLimit--;
     }
 
     while ( (userCoins > 0) ) {

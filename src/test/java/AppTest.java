@@ -33,7 +33,7 @@ public class AppTest {
   @Test
   public void limitedCoins_shouldGiveCoinCombos125Cents_4Quarters2Dime1Nickel() {
     App app = new App();
-    String coinResult = "We've only got a dollar worth of quarters, so here's what your change: 4 quarters, 2 dimes, 1 nickel, and no pennies.";
+    String coinResult = "So, here's what you get: 4 quarters, 2 dimes, 1 nickel, and no pennies.";
     assertEquals(coinResult, app.limitedCoins(125));
   }
 }
